@@ -1,0 +1,35 @@
+<MyDumbScreen@BoxLayout>:
+    orientation: "vertical"
+
+<MyButton@Button>
+    size_hint: None, None
+    size: 100, 100
+
+RelativeLayout
+    size_hint: None, None
+    size: 500, 500
+    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+    canvas:
+        Color:
+            rgba: 1, 1, 1, 0.3
+        Rectangle:
+            pos: 0, 0
+            size: self.size
+
+    MyButton
+        pos_hint: {'right': 1, 'bottom': 1}
+        size_hint: (.2, None)
+        height: 30
+        text: 'generate'
+        color: 'red'
+
+    TextInput:
+        id: my_user_input
+        text: "Add the numbers here"
+        size_hint: (.8, None)
+        height: 30
+        pos_hint: {'left':1, 'bottom': 1}
+    Label:
+        id: my_output
+        text: my_user_input.text + "!"
