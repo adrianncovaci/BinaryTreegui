@@ -2,6 +2,7 @@ from modules.queue import Queue
 from copy import deepcopy as deepcopy
 
 class Node:
+    # initializing NODE
     def __init__(self, dataValue):
         self.dataValue = dataValue
         self.leftChild = None
@@ -17,6 +18,7 @@ class Node:
             self.size = self.size + self.rightChild.size
 
 class binary_search_tree():
+    # initializing the BST
 
     def __init__(self):
         self.root = None
@@ -28,6 +30,7 @@ class binary_search_tree():
             self._insert(value, self.root)
 
     def _insert(self, value, cur_node):
+        #inserting a value to the BST
         if value < cur_node.dataValue:
             if cur_node.leftChild is None:
                 cur_node.leftChild = Node(value)
@@ -40,6 +43,7 @@ class binary_search_tree():
                 self._insert(value, cur_node.rightChild)
 
     def print_tree(self, transversal_type):
+        #Printing tree depending on the called transversal_type
         if transversal_type == "preorder":
             return self._print_preorder(self.root, "")
         elif transversal_type == "inorder":
@@ -51,13 +55,11 @@ class binary_search_tree():
             return False
 
     def _print_tree(self, root, indent, transversal = ""):
-
         if root is not None:
             self._print_tree(root.rightChild, indent + "   ")
             transversal += indent + str(root.dataValue)
             self._print_tree(root.leftChild, indent + "   ")
         return transversal
-
 
     def _print_preorder(self, start, transversal):
         # Root -> Left -> Right
@@ -90,6 +92,7 @@ class binary_search_tree():
             return False
 
     def _search(self, value, cur_node):
+        #Searches for the VALUE inside the BST
         if value==cur_node.dataValue:
             return True
         elif value < cur_node.dataValue and cur_node.leftChild!=None:
@@ -104,20 +107,6 @@ class binary_search_tree():
             current = current.leftChild
         return current
 
-    def find(self, value):
-        if self.root != None:
-            return self._find(value, self.root)
-        else:
-            return None
-
-    def _find(self, value, cur_node):
-        if value == cur_node.dataValue:
-            return cur_node
-        elif value < cur_node.dataValue and cur_node.leftChild != None:
-            return self._find(value, cur_node.leftChild)
-        elif value > cur_node.dataValue and cur_node.rightChild != None:
-            return self._find(value, cur_node.rightChild)
-
     def getNumNodes(self):
         if self.root:
             return self._getNumNodes(self.root)
@@ -125,6 +114,7 @@ class binary_search_tree():
             return 0
 
     def _getNumNodes(self, node):
+
         total = 1
         if node.leftChild:
             total += self._getNumNodes(node.leftChild)
@@ -347,12 +337,3 @@ class binary_search_tree():
 
         node.compute_size()
         return node
-
-nodes = "11 200 173 196 52 143 165 37 7 36"
-nodes = nodes.split(" ")
-nodes = [int(x) for x in nodes]
-bst = binary_search_tree()
-for i in nodes:
-    bst.insert(i)
-bst.prettyPrint()
-bst.printLevelOrder()
